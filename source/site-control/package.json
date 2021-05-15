@@ -1,0 +1,19 @@
+{
+  "name": "site-control",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "url": "git+ssh://git@github.com:/Janrupf/open-computers-software"
+  },
+  "scripts": {
+    "watch": "tstl --watch",
+    "build": "tstl"
+  },
+  "devDependencies": {
+    "@opct/openos": "^0.0.16",
+    "typescript-to-lua": "^0.39.3",
+    "typescript-tstl-plugin": "^0.2.0"
+  },
+  "author": "Janrupf",
+  "description": ""
+}
