@@ -2,6 +2,8 @@ import * as Component from "component";
 import * as Event from "event";
 
 import GuiController from "./gui/GuiController";
+import Page from "./gui/Page";
+import Button from "./gui/component/Button";
 
 print("SiteControl version 1.0.0 starting up!");
 if (!Component.gpu) {
@@ -9,6 +11,11 @@ if (!Component.gpu) {
 }
 
 const controller = new GuiController(Component.gpu);
+
+const testPage = new Page("test");
+testPage.add(new Button(4, 4, "Click me!", (button, player) => {
+    button.setText(`Clicked by ${player}`);
+}));
 
 function tickTimer() {
     Event.push("tickProgram");

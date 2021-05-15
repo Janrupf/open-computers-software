@@ -5,6 +5,10 @@ local Component = require("component")
 local Event = require("event")
 local ____GuiController = require("gui.GuiController")
 local GuiController = ____GuiController.default
+local ____Page = require("gui.Page")
+local Page = ____Page.default
+local ____Button = require("gui.component.Button")
+local Button = ____Button.default
 print("SiteControl version 1.0.0 starting up!")
 if not Component.gpu then
     error(
@@ -13,6 +17,18 @@ if not Component.gpu then
     )
 end
 local controller = __TS__New(GuiController, Component.gpu)
+local testPage = __TS__New(Page, "test")
+testPage:add(
+    __TS__New(
+        Button,
+        4,
+        4,
+        "Click me!",
+        function(____, button, player)
+            button:setText("Clicked by " .. player)
+        end
+    )
+)
 local function tickTimer(self)
     Event.push("tickProgram")
 end
@@ -24,37 +40,37 @@ while true do
     local event = ____[1]
     local data = __TS__ArraySlice(____, 1)
     local terminateLoop = (function()
-        local ____switch6 = event
-        if ____switch6 == "tickProgram" then
-            goto ____switch6_case_0
-        elseif ____switch6 == "touch" then
-            goto ____switch6_case_1
-        elseif ____switch6 == "interrupted" then
-            goto ____switch6_case_2
+        local ____switch7 = event
+        if ____switch7 == "tickProgram" then
+            goto ____switch7_case_0
+        elseif ____switch7 == "touch" then
+            goto ____switch7_case_1
+        elseif ____switch7 == "interrupted" then
+            goto ____switch7_case_2
         end
-        goto ____switch6_end
-        ::____switch6_case_0::
+        goto ____switch7_end
+        ::____switch7_case_0::
         do
             do
                 controller:draw()
-                goto ____switch6_end
+                goto ____switch7_end
             end
         end
-        ::____switch6_case_1::
+        ::____switch7_case_1::
         do
             do
                 controller:handleTouch(data[1], data[2], data[3])
                 controller:draw()
-                goto ____switch6_end
+                goto ____switch7_end
             end
         end
-        ::____switch6_case_2::
+        ::____switch7_case_2::
         do
             do
                 return true
             end
         end
-        ::____switch6_end::
+        ::____switch7_end::
         return false
     end)(nil)
     if terminateLoop then
