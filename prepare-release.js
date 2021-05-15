@@ -113,7 +113,11 @@ for (const dirName of fs.readdirSync(sourceDir)) {
             }
 
             for (const file of libFiles) {
-                files.set(file, "/lib");
+                if(file.startsWith(":")) {
+                    files.set(file, `/lib/${path.basename(file)}`);
+                } else {
+                    files.set(file, "/lib");
+                }
             }
 
             return files;
