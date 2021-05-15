@@ -5,9 +5,12 @@ export default class Page {
     private readonly name: string;
     private readonly components: GuiComponent[];
 
+    private dirty: boolean;
+
     public constructor(name: string) {
         this.name = name;
         this.components = [];
+        this.dirty = false;
     }
 
     public add(component: GuiComponent) {
@@ -39,18 +42,24 @@ export default class Page {
 
     public draw(context: DrawingContext) {
         for (const component of this.components) {
-            if(component.isDirty()) {
+            if(this.dirty || component.isDirty()) {
                 component.draw(context);
                 component.clearDirty();
             }
         }
+
+        this.dirty = false;
     }
 
     public isDirty(): boolean {
-        return this.components.some(c => c.isDirty());
+        return this.dirty || this.components.some(c => c.isDirty());
+    }
+
+    public markDirty() {
+        this.dirty = true;
     }
 
     private static isPointInRect(rectX: number, rectY: number, rectWidth: number, rectHeight: number, pointX: number, pointY: number) {
-        return rectX >= pointX && pointX <= (rectX + rectWidth) && rectY >= pointY && pointY <= (rectY + rectHeight);
+        return pointX >= rectY && pointX <= (rectX + rectWidth) && pointY >= rectY && pointY <= (rectY + rectHeight);
     }
 }

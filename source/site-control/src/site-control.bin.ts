@@ -17,6 +17,9 @@ testPage.add(new Button(4, 4, "Click me!", (button, player) => {
     button.setText(`Clicked by ${player}`);
 }));
 
+controller.registerPage(testPage);
+controller.openPage(testPage);
+
 function tickTimer() {
     Event.push("tickProgram");
 }
@@ -34,7 +37,7 @@ while (true) {
             }
 
             case "touch": {
-                controller.handleTouch(data[0], data[1], data[2]);
+                controller.handleTouch(data[1], data[2], data[0]);
                 controller.draw();
                 break;
             }

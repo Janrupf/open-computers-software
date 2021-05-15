@@ -17,6 +17,9 @@ ____exports.default = (function()
             page
         )
     end
+    function GuiController.prototype.openPage(self, page)
+        self.activePage = page
+    end
     function GuiController.prototype.handleTouch(self, x, y, player)
         if self.activePage ~= nil then
             local component = self.activePage:findComponentAt(x, y)

@@ -8,6 +8,7 @@ ____exports.default = (function()
     function Page.prototype.____constructor(self, name)
         self.name = name
         self.components = {}
+        self.dirty = false
     end
     function Page.prototype.add(self, component)
         __TS__ArrayPush(self.components, component)
@@ -30,20 +31,24 @@ ____exports.default = (function()
     end
     function Page.prototype.draw(self, context)
         for ____, component in ipairs(self.components) do
-            if component:isDirty() then
+            if self.dirty or component:isDirty() then
                 component:draw(context)
                 component:clearDirty()
             end
         end
+        self.dirty = false
     end
     function Page.prototype.isDirty(self)
-        return __TS__ArraySome(
+        return self.dirty or __TS__ArraySome(
             self.components,
             function(____, c) return c:isDirty() end
         )
     end
+    function Page.prototype.markDirty(self)
+        self.dirty = true
+    end
     function Page.isPointInRect(self, rectX, rectY, rectWidth, rectHeight, pointX, pointY)
-        return (((rectX >= pointX) and (pointX <= (rectX + rectWidth))) and (rectY >= pointY)) and (pointY <= (rectY + rectHeight))
+        return (((pointX >= rectY) and (pointX <= (rectX + rectWidth))) and (pointY >= rectY)) and (pointY <= (rectY + rectHeight))
     end
     return Page
 end)()

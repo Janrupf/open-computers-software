@@ -29,6 +29,8 @@ testPage:add(
         end
     )
 )
+controller:registerPage(testPage)
+controller:openPage(testPage)
 local function tickTimer(self)
     Event.push("tickProgram")
 end
@@ -59,7 +61,7 @@ while true do
         ::____switch7_case_1::
         do
             do
-                controller:handleTouch(data[1], data[2], data[3])
+                controller:handleTouch(data[2], data[3], data[1])
                 controller:draw()
                 goto ____switch7_end
             end

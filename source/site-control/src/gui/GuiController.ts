@@ -16,6 +16,10 @@ export default class GuiController {
         this.pages.set(page.getName(), page);
     }
 
+    public openPage(page: Page) {
+        this.activePage = page;
+    }
+
     public handleTouch(x: number, y: number, player: string) {
         if(this.activePage !== undefined) {
             const component = this.activePage.findComponentAt(x, y);

@@ -87,6 +87,10 @@ for (const dirName of fs.readdirSync(sourceDir)) {
         if (stat.isDirectory()) {
             libFiles.push(`:master/${relativeFile}`);
         } else if (stat.isFile()) {
+            if(path.basename(file) === "autorun.lua") {
+                continue;
+            }
+
             if (file.endsWith(".bin.lua")) {
                 const newFile = file.replace(".bin.lua", ".lua")
                 fs.renameSync(file, newFile);
