@@ -1,5 +1,5 @@
 import * as FS from "filesystem";
-import * as Process from "process";
+import * as Shell from "shell";
 
 function getProxy(...all: any[]) {
     return all[0];
@@ -7,3 +7,6 @@ function getProxy(...all: any[]) {
 
 const proxy = getProxy(...$vararg);
 FS.mount(proxy, "/home");
+
+Shell.setWorkingDirectory("//home");
+Shell.execute("site-control.bin");

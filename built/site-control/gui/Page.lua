@@ -32,8 +32,8 @@ ____exports.default = (function()
     function Page.prototype.draw(self, context)
         for ____, component in ipairs(self.components) do
             if self.dirty or component:isDirty() then
-                component:draw(context)
                 component:clearDirty()
+                component:draw(context)
             end
         end
         self.dirty = false

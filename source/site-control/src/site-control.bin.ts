@@ -4,6 +4,7 @@ import * as Event from "event";
 import GuiController from "./gui/GuiController";
 import Page from "./gui/Page";
 import Button from "./gui/component/Button";
+import Rectangle from "./gui/component/Rectangle";
 
 print("SiteControl version 1.0.0 starting up!");
 if (!Component.gpu) {
@@ -13,7 +14,8 @@ if (!Component.gpu) {
 const controller = new GuiController(Component.gpu);
 
 const testPage = new Page("test");
-testPage.add(new Button(4, 4, "Click me!", (button, player) => {
+testPage.add(new Rectangle(0, 0, -1, -1));
+testPage.add(new Button(0, 4, 80, "Click me!", (button, player) => {
     button.setText(`Clicked by ${player}`);
 }));
 

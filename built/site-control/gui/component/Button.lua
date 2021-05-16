@@ -8,24 +8,30 @@ ____exports.default = (function()
     local Button = ____exports.default
     Button.name = "Button"
     __TS__ClassExtends(Button, GuiComponent)
-    function Button.prototype.____constructor(self, x, y, text, callback)
-        GuiComponent.prototype.____constructor(self, x, y, #text + 2, 3)
+    function Button.prototype.____constructor(self, x, y, width, text, callback)
+        GuiComponent.prototype.____constructor(self, x, y, width, 3)
         self.text = text
         self.callback = callback
+        self.active = false
     end
     function Button.prototype.doDraw(self, context)
-        context:setColors(0, 65280)
+        if self.active then
+            context:setColors(16777215, 14483456)
+        else
+            context:setColors(16777215, 65280)
+        end
         context:rect(self.x, self.y, self.width, self.height)
-        context:setColors(16777215, 65280)
-        context:write(self.x + 1, self.y + 1, self.text)
+        local startX = ((self.width / 2) - (#self.text / 2)) + self.x
+        context:write(startX, self.y + 1, self.text)
     end
     function Button.prototype.setText(self, text)
         self.text = text
-        self.width = #text + 2
         self:markDirty()
     end
     function Button.prototype.onTouched(self, x, y, player)
+        self.active = true
         self:callback(self, player)
+        self:markDirty()
     end
     return Button
 end)()

@@ -17,6 +17,7 @@ export default class GuiController {
     }
 
     public openPage(page: Page) {
+        this.context.clearScreen();
         this.activePage = page;
     }
 

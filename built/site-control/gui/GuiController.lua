@@ -18,6 +18,7 @@ ____exports.default = (function()
         )
     end
     function GuiController.prototype.openPage(self, page)
+        self.context:clearScreen()
         self.activePage = page
     end
     function GuiController.prototype.handleTouch(self, x, y, player)

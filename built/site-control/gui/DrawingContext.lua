@@ -19,7 +19,27 @@ ____exports.default = (function()
         if fill == nil then
             fill = " "
         end
-        self.gpu.fill(x, y, width, height, fill)
+        self.gpu.fill(
+            x,
+            y,
+            self:substituteWidth(width),
+            self:substituteHeight(height),
+            fill
+        )
+    end
+    function DrawingContext.prototype.clearScreen(self)
+        local width, height = self.gpu.getViewport()
+        self:rect(0, 0, width, height)
+    end
+    function DrawingContext.prototype.substituteWidth(self, x)
+        return ((x == -1) and ({
+            self.gpu.getViewport()
+        })[1]) or x
+    end
+    function DrawingContext.prototype.substituteHeight(self, y)
+        return ((y == -1) and ({
+            self.gpu.getViewport()
+        })[2]) or y
     end
     return DrawingContext
 end)()

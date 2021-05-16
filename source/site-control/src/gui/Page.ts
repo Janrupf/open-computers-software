@@ -43,8 +43,8 @@ export default class Page {
     public draw(context: DrawingContext) {
         for (const component of this.components) {
             if(this.dirty || component.isDirty()) {
-                component.draw(context);
                 component.clearDirty();
+                component.draw(context);
             }
         }
 

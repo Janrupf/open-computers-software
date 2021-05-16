@@ -19,6 +19,19 @@ export default class DrawingContext {
             fill = " ";
         }
 
-        this.gpu.fill(x, y, width, height, fill);
+        this.gpu.fill(x, y, this.substituteWidth(width), this.substituteHeight(height), fill);
+    }
+
+    public clearScreen() {
+        const [width, height ] = this.gpu.getViewport();
+        this.rect(0, 0, width, height);
+    }
+
+    private substituteWidth(x: number): number {
+        return x == -1 ? this.gpu.getViewport()[0] : x;
+    }
+
+    private substituteHeight(y: number): number {
+        return y == -1 ? this.gpu.getViewport()[1] : y;
     }
 }

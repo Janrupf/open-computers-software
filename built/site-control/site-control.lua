@@ -9,6 +9,8 @@ local ____Page = require("gui.Page")
 local Page = ____Page.default
 local ____Button = require("gui.component.Button")
 local Button = ____Button.default
+local ____Rectangle = require("gui.component.Rectangle")
+local Rectangle = ____Rectangle.default
 print("SiteControl version 1.0.0 starting up!")
 if not Component.gpu then
     error(
@@ -19,10 +21,14 @@ end
 local controller = __TS__New(GuiController, Component.gpu)
 local testPage = __TS__New(Page, "test")
 testPage:add(
+    __TS__New(Rectangle, 0, 0, -1, -1)
+)
+testPage:add(
     __TS__New(
         Button,
+        0,
         4,
-        4,
+        80,
         "Click me!",
         function(____, button, player)
             button:setText("Clicked by " .. player)
